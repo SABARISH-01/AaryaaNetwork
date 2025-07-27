@@ -7,12 +7,12 @@ import AdminApp from './Admin/AdminApp.jsx';
 
 function App() {
   return (
-    // <SmoothScroll>
+    <SmoothScroll>
       <Routes>
         <Route path="/*" element={<WebRouter />} />
          <Route path="/admin/*"  element={<AdminApp/>}/>
       </Routes>
-    //  {/* </SmoothScroll> */}
+     </SmoothScroll> 
   );
 }
 

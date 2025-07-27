@@ -38,7 +38,7 @@ const CustomizedPage = () => {
 
     const fetchPlans = async () => {
       try {
-        const res = await axios.get("https://aaryaanetwork-1.onrender.com/api/plans/filter", {
+        const res = await axios.get("https://aaryaanetwork-backend.onrender.com/api/plans/filter", {
           params: { planType },
         });
         const data = res.data;

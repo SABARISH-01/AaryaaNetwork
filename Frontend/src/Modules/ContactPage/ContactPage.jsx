@@ -30,7 +30,7 @@ function ContactPage() {
     setResponseMsg("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact/post", {
+      const res = await fetch("https://aaryaanetwork-backend.onrender.com/api/contact/post", {
         method: "POST",
         body: JSON.stringify({
           firstName: form.firstName,

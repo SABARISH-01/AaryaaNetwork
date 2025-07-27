@@ -76,7 +76,7 @@ const AddPlan = () => {
     };
 
     try {
-      await axios.post("https://aaryaanetwork-1.onrender.com/api/plans", payload);
+      await axios.post("https://aaryaanetwork-backend.onrender.com/api/plans", payload);
       toast.success("Plan added successfully!");
       navigate("/admin/add-plans");
       setFormData({});
