@@ -63,6 +63,7 @@ function ContactPage() {
           message: "",
         });
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (err) {
       setResponseMsg("Something went wrong. Try again.");
       toast.error("Something went wrong. Try again.");
