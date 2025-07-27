@@ -11,9 +11,9 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://aaryaanetwork-1.onrender.com/*",
-    credentials: true,
-  })
+  origin: [process.env.CLIENT_URL],
+  credentials: true
+})
 );
 app.use(cookieParser());
 
