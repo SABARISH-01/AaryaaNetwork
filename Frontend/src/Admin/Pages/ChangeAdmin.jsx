@@ -16,7 +16,7 @@ const ChangeEmail = () => {
       const res = await API.post('/settings/change-email/request-otp', {
         currentEmail
       });
-      // setMessage(res.data.message);
+      setMessage(res.data.message);
       toast.success(res.data.message);
       setStep(2);
       setError('');

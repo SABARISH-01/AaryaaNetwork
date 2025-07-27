@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../Api/Api";
+// import API from "../Api/Api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Styles/AddPlans.css";
@@ -76,7 +76,7 @@ const AddPlan = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/plans", payload);
+      await axios.post("https://aaryaanetwork-1.onrender.com/api/plans", payload);
       toast.success("Plan added successfully!");
       navigate("/admin/add-plans");
       setFormData({});

@@ -40,7 +40,7 @@ const ViewPlans = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:5000/api/plans", {
+      const res = await axios.get("https://aaryaanetwork-1.onrender.com/api/plans", {
         withCredentials: true,
       });
       setPlans(res.data);
@@ -60,7 +60,7 @@ const ViewPlans = () => {
   const deletePlan = async (id) => {
     setDeletingPlanId(id);
     try {
-      await axios.delete(`http://localhost:5000/api/admin/plans/${id}`, {
+      await axios.delete(`https://aaryaanetwork-1.onrender.com/api/admin/plans/${id}`, {
         withCredentials: true,
       });
       fetchPlans();
@@ -101,7 +101,7 @@ const ViewPlans = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/admin/plans/import",
+        "https://aaryaanetwork-1.onrender.com/api/admin/plans/import",
         formData,
         {
           headers: {
