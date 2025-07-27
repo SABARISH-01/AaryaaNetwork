@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { TbArrowUpRight } from "react-icons/tb";
-import './ContactPage.css'
 import { FaArrowRightLong } from "react-icons/fa6";
 import CustomizedStyleleft from "../../assets/CustomizedStyleLeft.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import QueryImg from '../../assets/Contact/QueryImg.jpg'
 import Footer from '../../Components/Footer/Footer';
+import './ContactPage.css'
 function ContactPage() {
    const [form, setForm] = useState({
       firstName: '',
