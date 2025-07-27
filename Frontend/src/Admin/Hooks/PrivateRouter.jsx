@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PrivateRouter = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null = loading
@@ -17,6 +18,7 @@ const PrivateRouter = ({ children }) => {
         );
         setIsAuthenticated(res.data.authenticated);
       } catch (err) {
+        toast.error("Authentication failed"+err.message);
         setIsAuthenticated(false);
       }
     };
