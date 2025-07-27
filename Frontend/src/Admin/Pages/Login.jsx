@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/Login.css";
-import API from '../Api/Api'; // your custom axios instance
+import API from '../Api/Api';
+import { toast } from 'react-toastify';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -15,13 +16,14 @@ const AdminLogin = () => {
 
     try {
       const res = await API.post('/login', { email, password });
-
-      // Optional: if backend sends a message or token
-      // localStorage.setItem("token", res.data.token);
-
+      toast.success('Login successful');
+      document.cookie = `token=${res.data.token}; path=/; secure; HttpOnly; SameSite=Lax`;
+      setEmail('');
+   
       navigate('/admin/dashboard');
     } catch (err) {
       const msg = err.response?.data?.message || 'Login failed';
+      toast.error(msg);
       setError(msg);
     }
   };
