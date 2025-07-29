@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { TbArrowUpRight } from "react-icons/tb";
 import { FaArrowRightLong } from "react-icons/fa6";
 import CustomizedStyleleft from "../../assets/CustomizedStyleLeft.png";
@@ -8,6 +9,9 @@ import QueryImg from "../../assets/Contact/QueryImg.jpg";
 import Footer from "../../Components/Footer/Footer";
 import "./Contactpage.css";
 function ContactPage() {
+  const location = useLocation();
+  const selectedPlan = location.state?.selectedPlan || null;
+  
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -29,18 +33,35 @@ function ContactPage() {
     setResponseMsg("");
 
     try {
+      const requestBody = {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        phone: form.phone,
+        address: form.address,
+        message: form.message,
+      };
+
+      // Add plan details if a plan was selected
+      if (selectedPlan) {
+        requestBody.selectedPlan = {
+          speed: selectedPlan.speed,
+          provider: selectedPlan.provider,
+          duration: selectedPlan.duration,
+          planType: selectedPlan.planType,
+          price: selectedPlan.firstTimeTotal || selectedPlan.renewalTotal,
+          ottTier: selectedPlan.ottTier,
+          tvChannels: selectedPlan.tvChannels,
+          router: selectedPlan.router,
+          androidBox: selectedPlan.androidBox,
+        };
+      }
+
       const res = await fetch(
         "https://aaryaanetwork-backend.onrender.com/api/contact/post",
         {
           method: "POST",
-          body: JSON.stringify({
-            firstName: form.firstName,
-            lastName: form.lastName,
-            email: form.email,
-            phone: form.phone,
-            address: form.address,
-            message: form.message,
-          }),
+          body: JSON.stringify(requestBody),
           headers: {
             "Content-Type": "application/json",
           },
@@ -213,6 +234,30 @@ function ContactPage() {
             </div>
 
             <div className="right-query">
+              {selectedPlan && (
+                <div className="selected-plan-summary-contact">
+                  <h4>Selected Plan</h4>
+                  <ul>
+                    <li><b>Speed:</b> {selectedPlan.speed}</li>
+                    <li><b>Provider:</b> {selectedPlan.provider}</li>
+                    <li><b>Duration:</b> {selectedPlan.duration}</li>
+                    <li><b>Type:</b> {selectedPlan.planType}</li>
+                    <li><b>Price:</b> ₹{selectedPlan.firstTimeTotal || selectedPlan.renewalTotal}</li>
+                    {selectedPlan.ottTier && selectedPlan.ottTier !== "None" && (
+                      <li><b>OTT Tier:</b> {selectedPlan.ottTier}</li>
+                    )}
+                    {selectedPlan.tvChannels && selectedPlan.tvChannels !== "None" && (
+                      <li><b>TV Channels:</b> {selectedPlan.tvChannels}</li>
+                    )}
+                    {selectedPlan.router && selectedPlan.router !== "None" && (
+                      <li><b>Router:</b> {selectedPlan.router}</li>
+                    )}
+                    {selectedPlan.androidBox && (
+                      <li><b>Android Box:</b> Included</li>
+                    )}
+                  </ul>
+                </div>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="query-header">
                   <h1>Get In Touch</h1>

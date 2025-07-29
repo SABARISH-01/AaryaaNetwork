@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./CustomizedPage.css";
 import akka from "../../assets/Contact/akka.png";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -29,6 +30,7 @@ const CustomizedPage = () => {
   const [selectedTvChannel, setSelectedTvChannel] = useState("");
 
   const [currentPlan, setCurrentPlan] = useState(null);
+  const navigate = useNavigate();
 
   // Step 1: fetch all plans for the selected planType
   useEffect(() => {
@@ -102,25 +104,29 @@ const CustomizedPage = () => {
       p.duration === selectedDuration
   );
 
-  const ottTierOptions = planType.includes("ott")
-    ? [
-        ...new Set(
-          availablePlans
-            .map((p) => p.ottTier)
-            .filter((tier) => tier && tier !== "None")
-        ),
-      ]
-    : [];
+  const ottTierOptions = useMemo(() => {
+    return planType.includes("ott")
+      ? [
+          ...new Set(
+            availablePlans
+              .map((p) => p.ottTier)
+              .filter((tier) => tier && tier !== "None")
+          ),
+        ]
+      : [];
+  }, [planType, availablePlans]);
 
-  const tvChannelOptions = planType.includes("tv")
-    ? [
-        ...new Set(
-          availablePlans
-            .map((p) => p.tvChannels)
-            .filter((tv) => tv && tv !== "None")
-        ),
-      ]
-    : [];
+  const tvChannelOptions = useMemo(() => {
+    return planType.includes("tv")
+      ? [
+          ...new Set(
+            availablePlans
+              .map((p) => p.tvChannels)
+              .filter((tv) => tv && tv !== "None")
+          ),
+        ]
+      : [];
+  }, [planType, availablePlans]);
 
   // Auto-select first available OTT/TV option if needed
  useEffect(() => {
@@ -614,7 +620,12 @@ const CustomizedPage = () => {
                             : `₹${currentPlan.renewalTotal}`}
                         </span>
                       </div>
-                      <button className="get-plan-btn">Get Plan</button>
+                      <button 
+                        className="get-plan-btn"
+                        onClick={() => navigate('/contact', { state: { selectedPlan: currentPlan } })}
+                      >
+                        Get Plan
+                      </button>
                     </div>
                   </>
                 ) : (

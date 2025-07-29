@@ -334,3 +334,52 @@
    margin-top: 0px;
 }
 }
+
+/* Selected Plan Summary Styles */
+.selected-plan-summary-contact {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.selected-plan-summary-contact h4 {
+  color: #495057;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+  border-bottom: 2px solid #6c757d;
+  padding-bottom: 10px;
+}
+
+.selected-plan-summary-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.selected-plan-summary-contact li {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #495057;
+  border: 1px solid #e9ecef;
+}
+
+.selected-plan-summary-contact li b {
+  color: #212529;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .selected-plan-summary-contact ul {
+    grid-template-columns: 1fr;
+  }
+}
