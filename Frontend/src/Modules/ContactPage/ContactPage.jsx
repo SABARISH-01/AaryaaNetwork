@@ -12,9 +12,7 @@ function ContactPage() {
   const location = useLocation();
   const navigate = useNavigate();
   // const selectedPlan = location.state?.selectedPlan || null;
-  const [selectedPlan] = useState(
-    () => location.state?.selectedPlan || null
-  );
+  const [selectedPlan] = useState(() => location.state?.selectedPlan || null);
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -250,14 +248,13 @@ function ContactPage() {
             </div>
           </div>
         </div>
-        <section id="contact-form-section">
           <div className="cp-third-section">
             <div className="query">
               <div className="left-query">
                 <img src={QueryImg} className="left-query-img" />
               </div>
 
-              <div className="right-query">
+              <div className="right-query" id="contact-form-section">
                 {selectedPlan && showPlan && (
                   <div className="selected-plan-summary-contact">
                     <h4>Selected Plan</h4>
@@ -427,7 +424,6 @@ function ContactPage() {
               </div>
             </div>
           </div>
-        </section>
 
         <div className="cp-last-section footer-section">
           <Footer />
