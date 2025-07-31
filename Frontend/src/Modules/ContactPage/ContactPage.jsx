@@ -1,4 +1,4 @@
-// import React, { use } from "react";
+import React, { use } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -12,21 +12,23 @@ function ContactPage() {
   const location = useLocation();
   const navigate = useNavigate();
   // const selectedPlan = location.state?.selectedPlan || null;
-  const [selectedPlan] = useState(() => location.state?.selectedPlan || null);
+  const [selectedPlan, setSelectedPlan] = useState(
+    () => location.state?.selectedPlan || null
+  );
 
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const element = document.getElementById(location.state.scrollTo);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-
-          // Clear the scrollTo state after scroll
-          navigate(location.pathname, { replace: true, state: {} });
-        }, 100); // wait for DOM to render
-      }
-    }
-  }, [location, navigate]);
+   useEffect(() => {
+     if (location.state?.scrollTo) {
+       const element = document.getElementById(location.state.scrollTo);
+       if (element) {
+         setTimeout(() => {
+           element.scrollIntoView({ behavior: "smooth", block: "start" });
+ 
+           // Clear the scrollTo state after scroll
+           navigate(location.pathname, { replace: true, state: {} });
+         }, 100); // wait for DOM to render
+       }
+     }
+   }, [location, navigate]);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -38,6 +40,7 @@ function ContactPage() {
   });
 
   const [errors, setErrors] = useState({});
+  const [responseMsg, setResponseMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPlan, setShowPlan] = useState(true);
 
@@ -51,6 +54,7 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+    setResponseMsg("");
     setLoading(true);
 
     try {
@@ -106,7 +110,6 @@ function ContactPage() {
           message: "",
         });
       }
-      // eslint-disable-next-line no-unused-vars
     } catch (err) {
       toast.error("Something went wrong. Try again.");
     } finally {
@@ -248,182 +251,186 @@ function ContactPage() {
             </div>
           </div>
         </div>
+        <section id="contact-form-section">
           <div className="cp-third-section">
             <div className="query">
               <div className="left-query">
                 <img src={QueryImg} className="left-query-img" />
               </div>
-
-              <div className="right-query" id="contact-form-section">
-                {selectedPlan && showPlan && (
-                  <div className="selected-plan-summary-contact">
-                    <h4>Selected Plan</h4>
-                    <ul>
-                      <li>
-                        <b>Speed : </b> {selectedPlan.speed}
-                      </li>
-                      <li>
-                        <b>Provider : </b> {selectedPlan.provider}
-                      </li>
-                      <li>
-                        <b>Duration : </b> {selectedPlan.duration}
-                      </li>
-                      <li>
-                        <b>Type : </b> {selectedPlan.planType}
-                      </li>
-                      <li>
-                        <b>Price : </b> ₹
-                        {selectedPlan.firstTimeTotal ||
-                          selectedPlan.renewalTotal}
-                      </li>
-                      {selectedPlan.ottTier &&
-                        selectedPlan.ottTier !== "None" && (
+ 
+            
+                  <div className="right-query" id='selected-plan-section'>
+                    {selectedPlan && showPlan && (
+                      <div className="selected-plan-summary-contact">
+                        <h4>Selected Plan</h4>
+                        <ul>
                           <li>
-                            <b>OTT Tier : </b> {selectedPlan.ottTier}
+                            <b>Speed : </b> {selectedPlan.speed}
                           </li>
-                        )}
-                      {selectedPlan.tvChannels &&
-                        selectedPlan.tvChannels !== "None" && (
                           <li>
-                            <b>TV Channels : </b> {selectedPlan.tvChannels}
+                            <b>Provider : </b> {selectedPlan.provider}
                           </li>
-                        )}
-                      {selectedPlan.router &&
-                        selectedPlan.router !== "None" && (
                           <li>
-                            <b>Router : </b> {selectedPlan.router}
+                            <b>Duration : </b> {selectedPlan.duration}
                           </li>
-                        )}
-                      {selectedPlan.androidBox && (
-                        <li>
-                          <b>Android Box : </b> Included
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                )}
-                <form onSubmit={handleSubmit}>
-                  <div className="query-header">
-                    <h1>Get In Touch</h1>
-                    <p>
-                      I'm always open to new opportunities. Feel free to drop me
-                      a line if having any questions or projects.
-                    </p>
-                  </div>
-                  <div className="query-box">
-                    <div className="input-flex-box">
-                      <h3>First Name</h3>
-                      <div className="input-div">
-                        <input
-                          type="text"
-                          name="firstName"
-                          placeholder="Enter Your First Name"
-                          className="input-box"
-                          value={form.firstName}
-                          onChange={handleChange}
-                        ></input>
-                        {errors.firstName && (
-                          <p className="error">{errors.firstName}</p>
-                        )}
+                          <li>
+                            <b>Type : </b> {selectedPlan.planType}
+                          </li>
+                          <li>
+                            <b>Price : </b> ₹
+                            {selectedPlan.firstTimeTotal ||
+                              selectedPlan.renewalTotal}
+                          </li>
+                          {selectedPlan.ottTier &&
+                            selectedPlan.ottTier !== "None" && (
+                              <li>
+                                <b>OTT Tier : </b> {selectedPlan.ottTier}
+                              </li>
+                            )}
+                          {selectedPlan.tvChannels &&
+                            selectedPlan.tvChannels !== "None" && (
+                              <li>
+                                <b>TV Channels : </b> {selectedPlan.tvChannels}
+                              </li>
+                            )}
+                          {selectedPlan.router &&
+                            selectedPlan.router !== "None" && (
+                              <li>
+                                <b>Router : </b> {selectedPlan.router}
+                              </li>
+                            )}
+                          {selectedPlan.androidBox && (
+                            <li>
+                              <b>Android Box : </b> Included
+                            </li>
+                          )}
+                        </ul>
                       </div>
-                    </div>
-                    <div className="input-flex-box">
-                      <h3>Last Name</h3>
-                      <div className="input-div">
-                        <input
-                          type="text"
-                          name="lastName"
-                          placeholder="Enter Your Last Name"
-                          className="input-box"
-                          value={form.lastName}
-                          onChange={handleChange}
-                        ></input>
-                        {errors.firstName && (
-                          <p className="error">{errors.lastName}</p>
-                        )}
+                    )}
+                    <form onSubmit={handleSubmit}>
+                      <div className="query-header">
+                        <h1>Get In Touch</h1>
+                        <p>
+                          I'm always open to new opportunities. Feel free to drop me
+                          a line if having any questions or projects.
+                        </p>
                       </div>
-                    </div>
-                  </div>
-                  <div className="query-box">
-                    <div className="input-flex-box">
-                      <h3>Phone Number</h3>
-                      <div className="input-div">
-                        <input
-                          type="text"
-                          name="phone"
-                          placeholder="Enter your Phone Number"
-                          className="input-box"
-                          value={form.phone}
-                          onChange={handleChange}
-                        />
-                        {errors.phone && (
-                          <p className="error">{errors.phone}</p>
-                        )}
+                      <div className="query-box">
+                        <div className="input-flex-box">
+                          <h3>First Name</h3>
+                          <div className="input-div">
+                            <input
+                              type="text"
+                              name="firstName"
+                              placeholder="Enter Your First Name"
+                              className="input-box"
+                              value={form.firstName}
+                              onChange={handleChange}
+                            ></input>
+                            {errors.firstName && (
+                              <p className="error">{errors.firstName}</p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="input-flex-box">
+                          <h3>Last Name</h3>
+                          <div className="input-div">
+                            <input
+                              type="text"
+                              name="lastName"
+                              placeholder="Enter Your Last Name"
+                              className="input-box"
+                              value={form.lastName}
+                              onChange={handleChange}
+                            ></input>
+                            {errors.firstName && (
+                              <p className="error">{errors.lastName}</p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="input-flex-box">
-                      <h3>Address</h3>
-                      <div className="input-div">
-                        <input
-                          type="text"
-                          name="address"
-                          placeholder="Enter your Address"
-                          className="input-box"
-                          value={form.address}
-                          onChange={handleChange}
-                        />
-                        {errors.address && (
-                          <p className="error">{errors.address}</p>
-                        )}
+                      <div className="query-box">
+                        <div className="input-flex-box">
+                          <h3>Phone Number</h3>
+                          <div className="input-div">
+                            <input
+                              type="text"
+                              name="phone"
+                              placeholder="Enter your Phone Number"
+                              className="input-box"
+                              value={form.phone}
+                              onChange={handleChange}
+                            />
+                            {errors.phone && (
+                              <p className="error">{errors.phone}</p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="input-flex-box">
+                          <h3>Address</h3>
+                          <div className="input-div">
+                            <input
+                              type="text"
+                              name="address"
+                              placeholder="Enter your Address"
+                              className="input-box"
+                              value={form.address}
+                              onChange={handleChange}
+                            />
+                            {errors.address && (
+                              <p className="error">{errors.address}</p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="address-box input-flex-box">
-                    <h3>Email Address</h3>
-                    <div className="input-div">
-                      <input
-                        type="text"
-                        name="email"
-                        placeholder="Enter your Email Address"
-                        className="input-adr-box"
-                        value={form.email}
-                        onChange={handleChange}
-                      />
-                      {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                  </div>
+                      <div className="address-box input-flex-box">
+                        <h3>Email Address</h3>
+                        <div className="input-div">
+                          <input
+                            type="text"
+                            name="email"
+                            placeholder="Enter your Email Address"
+                            className="input-adr-box"
+                            value={form.email}
+                            onChange={handleChange}
+                          />
+                          {errors.email && <p className="error">{errors.email}</p>}
+                        </div>
+                      </div>
 
-                  <div className="message input-flex-box">
-                    <h3>Message</h3>
-                    <div className="input-div">
-                      <textarea
-                        name="message"
-                        placeholder="Enter your message here..."
-                        rows={6}
-                        cols={50}
-                        className="message-box"
-                        value={form.message}
-                        onChange={handleChange}
-                      />
-                      {/* {errors.message && (
-                      <p className="error">{errors.message}</p>
-                    )} */}
-                    </div>
+                      <div className="message input-flex-box">
+                        <h3>Message</h3>
+                        <div className="input-div">
+                          <textarea
+                            name="message"
+                            placeholder="Enter your message here..."
+                            rows={6}
+                            cols={50}
+                            className="message-box"
+                            value={form.message}
+                            onChange={handleChange}
+                          />
+                          {/* {errors.message && (
+                          <p className="error">{errors.message}</p>
+                        )} */}
+                        </div>
+                      </div>
+                      <div className="button-div">
+                        <button
+                          className="send-message"
+                          type="submit"
+                          disabled={loading}
+                        >
+                          {loading ? "Sending..." : "Send Message"}
+                        </button>
+                      </div>
+                    </form>
                   </div>
-                  <div className="button-div">
-                    <button
-                      className="send-message"
-                      type="submit"
-                      disabled={loading}
-                    >
-                      {loading ? "Sending..." : "Send Message"}
-                    </button>
-                  </div>
-                </form>
-              </div>
+              
             </div>
           </div>
+        </section>
 
         <div className="cp-last-section footer-section">
           <Footer />

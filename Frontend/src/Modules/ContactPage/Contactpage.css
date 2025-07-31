@@ -96,8 +96,8 @@
 .contact-box .contact-box2-in {
   background-image: url('../../assets/Contact/whatsapp.gif');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0px;
+  background-size: contain;
+  background-position: center;
 }
 .contact-box .contact-box3-in {
   background-image: url("../../assets/Contact/location.gif");

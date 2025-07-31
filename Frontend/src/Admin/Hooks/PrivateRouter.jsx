@@ -9,7 +9,7 @@ const PrivateRouter = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("https://aaryaanetwork-backend.onrender.com/api/check-auth", {
+        const res = await axios.get("http://localhost:5000/api/check-auth", {
           withCredentials: true,
         });
         setIsAuthenticated(res.data.authenticated);

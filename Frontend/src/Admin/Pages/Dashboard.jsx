@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const res = await axios.get("https://aaryaanetwork-backend.onrender.com/api/plans", { withCredentials: true });
+        const res = await axios.get("http://localhost:5000/api/plans", { withCredentials: true });
         setPlans(res.data);
         // eslint-disable-next-line no-unused-vars
       } catch (err) {
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     const fetchRecentChanges = async () => {
       try {
-        const res = await axios.get("https://aaryaanetwork-backend.onrender.com/api/plans/recent", { withCredentials: true });
+        const res = await axios.get("http://localhost:5000/api/plans/recent", { withCredentials: true });
         setRecentPlans(res.data);
         // eslint-disable-next-line no-unused-vars
       } catch (err) {

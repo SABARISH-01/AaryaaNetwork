@@ -279,7 +279,7 @@ const CustomizedPage = () => {
           <div className="description-left">
             <h3>Make your perfect broadband plan in seconds</h3>
             <p className="sub-heading">
-              Why settled for fixed plans when you can build your own? Whether
+              Why setteled for fixed plans when you can build your own? Whether
               you are streaming, gaming, working from home or doing it all,
               create a plan that fits you perfectly.
             </p>
@@ -297,9 +297,9 @@ const CustomizedPage = () => {
               Our Budget<span> Friendly Packages</span>
             </h2>
             <p className="heading-para">
-              Connect every smile at home with our joyful fibre experience —
-              bringing internet, TV, and OTT together to keep your family
-              entertained, united, and closer than ever
+              Lorem ipsum dolor sit amet consectutuor adipsing elit. Quisui
+              elucious ex sapien vitae palansec sem parcelet. In id cursus me
+              pretimum tellus dius convallis
             </p>
           </div>
           <div className="total-container">
@@ -357,7 +357,9 @@ const CustomizedPage = () => {
                         onClick={() => setSelectedProvider(provider)}
                         type="button"
                       >
-                        <div className="circle"></div>
+                        <div className="circle">
+                           
+                        </div>
                         {provider}
                       </button>
                     ))}
@@ -683,10 +685,7 @@ const CustomizedPage = () => {
                       className="get-plan-btn"
                       onClick={() =>
                         navigate("/contact", {
-                          state: {
-                            selectedPlan: currentPlan,
-                            scrollTo: "contact-form-section",
-                          },
+                          state: { selectedPlan: currentPlan , scrollTo: "selected-plan-section" },
                         })
                       }
                     >
