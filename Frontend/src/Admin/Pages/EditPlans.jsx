@@ -45,7 +45,7 @@ const EditPlan = () => {
     const fetchPlan = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:5000/api/plans/${id}`);
+        const res = await axios.get(`https://aaryaanetwork-backend.onrender.com/api/plans/${id}`);
 
         setFormData({
           speed: res.data.speed || "",
@@ -114,7 +114,7 @@ const EditPlan = () => {
           : [],
         androidBox: formData.androidBox === "Yes"
       };
-      await axios.put(`http://localhost:5000/api/plans/${id}`, payload,{ withCredentials: true });
+      await axios.put(`https://aaryaanetwork-backend.onrender.com/api/plans/${id}`, payload,{ withCredentials: true });
       toast.success("Plan updated successfully!");
       navigate("/admin/view-plans");
     } catch (err) {

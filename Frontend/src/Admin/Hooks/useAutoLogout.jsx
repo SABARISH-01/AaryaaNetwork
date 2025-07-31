@@ -13,7 +13,7 @@ export default function useAutoLogout() {
   useEffect(() => {
     const logout = async () => {
       try {
-        await axios.post("http://localhost:5000/api/admin/logout", {}, {
+        await axios.post("https://aaryaanetwork-backend.onrender.com/api/logout", {}, {
           withCredentials: true,
         });
       } catch (error) {

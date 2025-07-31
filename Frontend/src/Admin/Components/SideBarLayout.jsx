@@ -15,7 +15,7 @@ const SidebarLayout = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/logout",
+        "https://aaryaanetwork-backend.onrender.com/api/logout",
         {},
         {
           withCredentials: true, // Needed to send cookies

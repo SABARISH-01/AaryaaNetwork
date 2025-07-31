@@ -87,7 +87,7 @@ const AddPlan = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/plans", payload,{withCredentials: true});
+      await axios.post("https://aaryaanetwork-backend.onrender.com/api/plans", payload,{withCredentials: true});
       toast.success("Plan added successfully!");
       navigate("/admin/add-plans");
       setFormData({});
