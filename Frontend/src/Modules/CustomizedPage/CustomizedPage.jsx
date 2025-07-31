@@ -683,7 +683,10 @@ const CustomizedPage = () => {
                       className="get-plan-btn"
                       onClick={() =>
                         navigate("/contact", {
-                          state: { selectedPlan: currentPlan ,scrollTo: "contact-form-section"},
+                          state: {
+                            selectedPlan: currentPlan,
+                            scrollTo: "contact-form-section",
+                          },
                         })
                       }
                     >
