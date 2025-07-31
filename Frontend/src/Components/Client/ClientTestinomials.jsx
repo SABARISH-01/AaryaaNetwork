@@ -68,7 +68,6 @@ const testimonials = [
       "நகரில் சிறந்த முறையில் ஒலி ஒளி சேவையும், தொலை தொடர்பு சேவையும் செய்து வருவதற்க்கு வாழ்த்துக்கள் இராமச்சந்திரன் ஆலோசகர்காப்பீடு / முதலீடுஎல்.ஐ .சி. மற்றும் எக்விடாஸ் வங்கி சமுதாயச்சேவையில் வெள்ளி விழா கண்ட புதிய பார்வை தன்னார்வத் தொண்டு அமைப்பின் மாத இதழ் ஆசிரியர்",
     image: name7,
   },
-  
 ];
 
 export default function SwiperTestimonialSlider() {
@@ -77,23 +76,20 @@ export default function SwiperTestimonialSlider() {
       <div className="testimonial-wrapper">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
-           breakpoints={{
-              0: {
-                slidesPerView: 1,
-                spaceBetween:0,
-
-              },
-              768: {
-                slidesPerView: 1.5, 
-                spaceBetween:100,
-
-              },
-              1024: {
-                slidesPerView: 2, 
-                spaceBetween:-200,
-
-              },
-            }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 1.5,
+              spaceBetween: 100,
+            },
+            1050: {
+              slidesPerView: 2,
+              spaceBetween: -100,
+            },
+          }}
           centeredSlides={true}
           loop={true}
           // spaceBetween={-150}
@@ -102,7 +98,7 @@ export default function SwiperTestimonialSlider() {
             delay: 15000,
             disableOnInteraction: false,
           }}
-           pagination={{
+          pagination={{
             el: ".testimonial-pagination",
             clickable: true,
           }}

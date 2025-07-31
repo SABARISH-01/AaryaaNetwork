@@ -35,7 +35,7 @@ const GstSetting = () => {
 
     setSaving(true);
     try {
-      await API.post("/set-gst", { gstPercent: parsedGst });
+      await API.post("/set-gst", { gstPercent: parsedGst }, { withCredentials: true });
       toast.success(`GST updated to ${parsedGst}%`);
     // eslint-disable-next-line no-unused-vars
     } catch (_) {

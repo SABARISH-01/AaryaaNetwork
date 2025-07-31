@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import API from "../Api/Api";
+import API from "../Api/Api";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Styles/AddPlans.css";
@@ -9,7 +9,7 @@ const PLAN_TYPE_OPTIONS = [
   { label: "Internet Only", value: "internet" },
   { label: "Internet + OTT", value: "internet+ott" },
   { label: "Internet + TV", value: "internet+tv" },
-  { label: "Internet + TV + OTT", value: "internet+tv+ott" }
+  { label: "Internet + TV + OTT", value: "internet+tv+ott" },
 ];
 const DURATION_OPTIONS = ["Monthly", "Quarterly", "Half-Yearly", "Yearly"];
 
@@ -30,7 +30,7 @@ const AddPlan = () => {
     tvCharge: "",
     advancePayment: "",
     router: "",
-    androidBox: "No"
+    androidBox: "No",
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -40,9 +40,17 @@ const AddPlan = () => {
     const { name, value } = e.target;
     // Prevent negative numbers
     if (
-      ["basePrice", "discountPercent", "installationFee", "ottCharge", "tvCharge", "advancePayment"].includes(name) &&
+      [
+        "basePrice",
+        "discountPercent",
+        "installationFee",
+        "ottCharge",
+        "tvCharge",
+        "advancePayment",
+      ].includes(name) &&
       Number(value) < 0
-    ) return;
+    )
+      return;
 
     setFormData({ ...formData, [name]: value });
   };
@@ -70,13 +78,16 @@ const AddPlan = () => {
       tvCharge: formData.tvCharge !== "" ? Number(formData.tvCharge) : -1,
       advancePayment: Number(formData.advancePayment) || 0,
       ottList: formData.ottList
-        ? formData.ottList.split(",").map((x) => x.trim()).filter(Boolean)
+        ? formData.ottList
+            .split(",")
+            .map((x) => x.trim())
+            .filter(Boolean)
         : [],
-      androidBox: formData.androidBox === "Yes"
+      androidBox: formData.androidBox === "Yes",
     };
 
     try {
-      await axios.post("https://aaryaanetwork-backend.onrender.com/api/plans", payload);
+      await axios.post("http://localhost:5000/api/plans", payload,{withCredentials: true});
       toast.success("Plan added successfully!");
       navigate("/admin/add-plans");
       setFormData({});
@@ -93,7 +104,10 @@ const AddPlan = () => {
     <div className="add-plan-container">
       <h2>Add Internet Plan</h2>
       {error && (
-        <p className="add-plan-error" style={{ color: "red", marginBottom: "1rem" }}>
+        <p
+          className="add-plan-error"
+          style={{ color: "red", marginBottom: "1rem" }}
+        >
           {error}
         </p>
       )}
@@ -121,7 +135,11 @@ const AddPlan = () => {
           required
         >
           <option value="">Select Duration</option>
-          {DURATION_OPTIONS.map(d => <option key={d} value={d}>{d}</option>)}
+          {DURATION_OPTIONS.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
         </select>
 
         <label htmlFor="provider">
@@ -147,8 +165,10 @@ const AddPlan = () => {
           required
         >
           <option value="">Select Plan Type</option>
-          {PLAN_TYPE_OPTIONS.map(pt => (
-            <option key={pt.value} value={pt.value}>{pt.label}</option>
+          {PLAN_TYPE_OPTIONS.map((pt) => (
+            <option key={pt.value} value={pt.value}>
+              {pt.label}
+            </option>
           ))}
         </select>
 
@@ -269,11 +289,7 @@ const AddPlan = () => {
           <option value="Yes">Yes</option>
         </select>
 
-        <button
-          type="submit"
-          className="submit-btn"
-          disabled={submitting}
-        >
+        <button type="submit" className="submit-btn" disabled={submitting}>
           {submitting ? "Adding..." : "Add Plan"}
         </button>
       </form>

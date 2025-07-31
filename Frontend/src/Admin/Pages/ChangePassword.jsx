@@ -22,11 +22,17 @@ const ChangePassword = () => {
     }
 
     try {
-      const res = await API.post("/settings/change-password", {
-        email:email,
-        currentPassword: currentPass,
-        newPassword: newPass,
-      });
+      const res = await API.post(
+        "/settings/change-password",
+        {
+          email: email,
+          currentPassword: currentPass,
+          newPassword: newPass,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       // setMessage(res.data.message);//
       toast.success(res.data.message);
@@ -44,7 +50,12 @@ const ChangePassword = () => {
       <h3>Change Password</h3>
       <form onSubmit={handleChangePassword}>
         <label>Email:</label>
-          <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <label>Current Password:</label>
         <input
           type="password"

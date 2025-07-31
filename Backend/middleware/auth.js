@@ -8,7 +8,7 @@ const auth = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { id: decoded.id }; // <-- This is required for downstream controllers
+    req.user = { id: decoded.id }; 
     next();
   } catch (err) {
     res.status(401).json({ message: "Token is not valid" });

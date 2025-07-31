@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://aaryaanetwork-backend.onrender.com/api/admin",
+  baseURL: "http://localhost:5000/api",
   withCredentials: true,
 });
 

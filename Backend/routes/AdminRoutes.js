@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
+
 const {
   register,
   loginAdmin,
@@ -8,13 +10,13 @@ const {
   verifyToken,
 } = require("../controllers/AdminController");
 
+router.get("/check-auth", verifyToken);
 
-router.get('/check-auth',verifyToken);
-
-router.post('/register', register);
-router.post('/login', loginAdmin);
-router.get("/get-gst", getGst);
-router.post("/set-gst", setGst);
+router.post("/register", register);
+router.post("/login", loginAdmin);
+router.use(auth);
+router.get("/get-gst", auth, getGst);
+router.post("/set-gst", auth, setGst);
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
@@ -23,6 +25,5 @@ router.post("/logout", (req, res) => {
   });
   res.json({ message: "Logged out successfully" });
 });
-
 
 module.exports = router;

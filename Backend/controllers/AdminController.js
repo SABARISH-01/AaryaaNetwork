@@ -25,8 +25,8 @@ exports.loginAdmin = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // set to true if using HTTPS
-      sameSite: "none",
+      secure: false, // set to true if using HTTPS
+      sameSite: "lax",
       maxAge: 60 * 60 * 1000,
     });
 

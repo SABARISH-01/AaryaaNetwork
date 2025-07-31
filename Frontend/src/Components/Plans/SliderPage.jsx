@@ -7,7 +7,9 @@ import JioLogo from "../../assets/OTT&TV/JioHotstar.jpg";
 import AhaLogo from "../../assets/OTT&TV/Aha.png";
 import SunNxtLogo from "../../assets/OTT&TV/SunNxt.png";
 import "./SliderPage.css";
-import { useNavigate } from 'react-router-dom';
+import logo from "../../assets/AaryaaLogo.png";
+
+import { useNavigate } from "react-router-dom";
 
 export default function SliderPage() {
   const [activeCard, setActiveCard] = useState(null);
@@ -62,25 +64,44 @@ export default function SliderPage() {
 
           <div className="slider-box-banner slider-box-banner2">
             <div className="linear-black">
-                    <p className="s-txt-heading">Unlimited Internet. 450+ TV Channels</p>
-                              <h2 className="s-txt-subheading">Watch your favorite TV channels and enjoy seamless internet together.</h2>
-                              <p className="s-txt-dec">Aaryaa Network<span> - One Connection. Endless TV</span></p>
+              <p className="s-txt-heading">
+                Unlimited Internet. 450+ TV Channels
+              </p>
+              <h2 className="s-txt-subheading">
+                Watch your favorite TV channels and enjoy seamless internet
+                together.
+              </h2>
+              <p className="s-txt-dec">
+                Aaryaa Network<span> - One Connection. Endless TV</span>
+              </p>
             </div>
           </div>
 
           <div className="slider-box-banner slider-box-banner3">
             <div className="linear-black">
-                    <p className="s-txt-heading">450+ TV Channels. 23+ OTT Apps. One Powerful Plan.</p>
-                    <h2 className="s-txt-subheading">Entertainment without limits with blazing-fast internet.</h2>
-                    <p className="s-txt-dec">Aaryaa Network<span> - Your Home, Your Theatre</span></p>
+              <p className="s-txt-heading">
+                450+ TV Channels. 23+ OTT Apps. One Powerful Plan.
+              </p>
+              <h2 className="s-txt-subheading">
+                Entertainment without limits with blazing-fast internet.
+              </h2>
+              <p className="s-txt-dec">
+                Aaryaa Network<span> - Your Home, Your Theatre</span>
+              </p>
             </div>
           </div>
 
           <div className="slider-box-banner slider-box-banner4">
-              <div className="linear-black">
-                    <p className="s-txt-heading">Netflix. Prime. JioCinema. Unlimited Internet.</p>
-                    <h2 className="s-txt-subheading">Stay connected with unlimited 40 Mbps speed at the best price.</h2>
-                    <p className="s-txt-dec">Aaryaa Network<span> - Simple. Fast. Reliable</span></p>
+            <div className="linear-black">
+              <p className="s-txt-heading">
+                Netflix. Prime. JioCinema. Unlimited Internet.
+              </p>
+              <h2 className="s-txt-subheading">
+                Stay connected with unlimited 40 Mbps speed at the best price.
+              </h2>
+              <p className="s-txt-dec">
+                Aaryaa Network<span> - Simple. Fast. Reliable</span>
+              </p>
             </div>
           </div>
 
@@ -133,7 +154,10 @@ export default function SliderPage() {
               Choose the perfect plan with Aaraaya Network internet, TV, and OTT
               bundles. Stream, surf, and enjoy seamlessly, all in one place.
             </p>
-            <div className="plans-btn" onClick={() => navigate("/customizedplan")}>
+            <div
+              className="plans-btn"
+              onClick={() => navigate("/customizedplan")}
+            >
               <div className="plans-btn-inside">
                 <p>Get Our Plans</p>
               </div>
@@ -162,12 +186,23 @@ export default function SliderPage() {
                       <p>Valid 30 days</p>
                     </div>
                   </div>
-                  <button className="main-btn" onClick={() => navigate("/contact")}>Get @ ₹399</button>
+                  <button
+                    className="main-btn"
+                    onClick={() => navigate("/contact")}
+                  >
+                    Get @ ₹399
+                  </button>
 
                   <div className="card-divider-div">
                     <hr className="card-divider" />
                   </div>
                   <p className="card-includes no-inclu">No Includes</p>
+                  <div className="aaryaa-logo-bottom">
+                    <div className="logo-bottom">
+                      <img src={logo} alt="Logo" />
+                      <p>Network</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -187,13 +222,25 @@ export default function SliderPage() {
                       <p>Valid 30 days</p>
                     </div>
                   </div>
-                  <button className="main-btn" onClick={() => navigate("/contact")}>Get @ ₹499</button>
+                  <button
+                    className="main-btn"
+                    onClick={() => navigate("/contact")}
+                  >
+                    Get @ ₹499
+                  </button>
 
                   <div className="card-divider-div">
                     <hr className="card-divider" />
                   </div>
                   <p className="card-includes">Also Includes</p>
                   <button className="tv-channel-btn">450+ Tv Channels</button>
+
+                  <div className="aaryaa-logo-bottom">
+                    <div className="logo-bottom">
+                      <img src={logo} alt="Logo" />
+                      <p>Network</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -213,7 +260,12 @@ export default function SliderPage() {
                       <p>Valid 30 days</p>
                     </div>
                   </div>
-                  <button className="main-btn" onClick={() => navigate("/contact")}>Get @ ₹599</button>
+                  <button
+                    className="main-btn"
+                    onClick={() => navigate("/contact")}
+                  >
+                    Get @ ₹599
+                  </button>
 
                   <div className="card-divider-div">
                     <hr className="card-divider" />
@@ -248,10 +300,16 @@ export default function SliderPage() {
                     </div>
                   </div>
                   <div className="tv-ott-channel">
-                        <button className="tv-channel-btn">450+ Tv Channels</button>
-                        <button className="ott-channel-btn power-ott">
-                          23+ OTT Apps
-                        </button>
+                    {/* <button className="tv-channel-btn">450+ Tv Channels</button> */}
+                    <button className="ott-channel-btn power-ott">
+                      23+ OTT Apps
+                    </button>
+                  </div>
+                  <div className="aaryaa-logo-bottom">
+                    <div className="logo-bottom">
+                      <img src={logo} alt="Logo" />
+                      <p>Network</p>
+                    </div>
                   </div>
                 </div>
               )}
@@ -259,20 +317,25 @@ export default function SliderPage() {
               {getCardName() === "max" && (
                 <div className="card-content plan-card">
                   <div className="card-title">
-                    <h2 className="card-heading">Power</h2>
+                    <h2 className="card-heading">Power Max</h2>
                     <p className="card-subheading">
-                      ( <span>Internet + IPTV + OTT</span>)
+                      ( <span>Internet + Premium OTT</span>)
                     </p>
                   </div>
                   <p className="card-desc">Best for full Entertainment</p>
                   <div className="card-mbs">
-                    <h2 className="mbs-text">75 Mbs</h2>
+                    <h2 className="mbs-text">100 Mbs</h2>
                     <div className="card-mbs-info">
                       <p>Unlimited</p>
                       <p>Valid 30 days</p>
                     </div>
                   </div>
-                  <button className="main-btn" onClick={() => navigate("/contact")}>Get @ ₹599</button>
+                  <button
+                    className="main-btn"
+                    onClick={() => navigate("/contact")}
+                  >
+                    Get @ ₹999
+                  </button>
 
                   <div className="card-divider-div">
                     <hr className="card-divider" />
@@ -307,6 +370,13 @@ export default function SliderPage() {
                     </div>
                   </div>
                   <button className="ott-channel-btn ">28+ OTT Apps</button>
+
+                  <div className="aaryaa-logo-bottom">
+                    <div className="logo-bottom">
+                      <img src={logo} alt="Logo" />
+                      <p>Network</p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

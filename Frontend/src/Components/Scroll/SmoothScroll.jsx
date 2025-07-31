@@ -1,9 +1,8 @@
-
 import "./SmoothScroll.css"; // you will create this for smoothness
-import React, { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
+import React, { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 const SmoothScroll = ({ children }) => {
   const containerRef = useRef(null);

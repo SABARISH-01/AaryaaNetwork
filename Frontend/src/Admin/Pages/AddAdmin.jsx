@@ -16,16 +16,16 @@ const AddAdmin = () => {
     setError("");
 
     if (password !== confirmPass) {
-      setError("Passwords do not match.");
+      // setError("Passwords do not match.");
       toast.error("Passwords do not match.");
 
       return;
     }
 
     try {
-      const res = await API.post("/settings/add", { email, password });
+      const res = await API.post("/settings/add", { email, password } ,{withCredentials: true});
       // setMessage(res.data.message);
-      toast.success("Admin added successfully!"+res.data.message);
+      toast.success("Admin added successfully!");
       setEmail("");
       setPassword("");
       setConfirmPass("");

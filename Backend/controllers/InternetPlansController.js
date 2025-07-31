@@ -12,12 +12,16 @@ exports.seedPlansFromExcel = async (req, res) => {
     const ext = path.extname(req.file.originalname).toLowerCase();
     if (![".xlsx", ".xls"].includes(ext)) {
       fs.unlinkSync(req.file.path);
-      return res.status(400).json({ message: "Invalid file type. Only Excel files allowed." });
+      return res
+        .status(400)
+        .json({ message: "Invalid file type. Only Excel files allowed." });
     }
 
     if (req.file.size > 2 * 1024 * 1024) {
       fs.unlinkSync(req.file.path);
-      return res.status(400).json({ message: "File too large. Max 2MB allowed." });
+      return res
+        .status(400)
+        .json({ message: "File too large. Max 2MB allowed." });
     }
 
     const workbook = xlsx.readFile(req.file.path);
@@ -30,7 +34,9 @@ exports.seedPlansFromExcel = async (req, res) => {
     for (const plan of plansData) {
       if (
         plan.speed &&
-        ["Monthly", "Quarterly", "Half-Yearly", "Yearly"].includes(plan.duration) &&
+        ["Monthly", "Quarterly", "Half-Yearly", "Yearly"].includes(
+          plan.duration
+        ) &&
         plan.provider &&
         typeof plan.basePrice === "number"
       ) {
@@ -58,9 +64,10 @@ exports.seedPlansFromExcel = async (req, res) => {
           planType: plan.planType || "internet",
           ottTier: plan.ottTier || "None",
           ottCharge: Number(plan.ottCharge) || 0,
-          ottList: typeof plan.ottList === "string"
-            ? plan.ottList.split(",").map((p) => p.trim())
-            : [],
+          ottList:
+            typeof plan.ottList === "string"
+              ? plan.ottList.split(",").map((p) => p.trim())
+              : [],
           tvChannels: plan.tvChannels || "None",
           tvCharge: Number(plan.tvCharge) || 0,
           advancePayment: Number(plan.advancePayment) || 0,
@@ -77,9 +84,8 @@ exports.seedPlansFromExcel = async (req, res) => {
 
     fs.unlinkSync(req.file.path);
     res.status(200).json({
-      message: `✅ ${inserted} plans inserted, ${skipped} duplicates skipped.`
+      message: `✅ ${inserted} plans inserted, ${skipped} duplicates skipped.`,
     });
-
   } catch (err) {
     console.error("Seeding error:", err);
     if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
@@ -108,10 +114,18 @@ exports.getAllPlans = async (req, res) => {
         : 0;
       const discountedBase = plan.basePrice - discount;
       const addons = (plan.ottCharge || 0) + (plan.tvCharge || 0);
-      const gst = parseFloat(((discountedBase + addons) * gstPercent / 100).toFixed(2));
-      const renewalTotal = parseFloat((discountedBase + addons + gst).toFixed(2));
+      const gst = parseFloat(
+        (((discountedBase + addons) * gstPercent) / 100).toFixed(2)
+      );
+      const renewalTotal = parseFloat(
+        (discountedBase + addons + gst).toFixed(2)
+      );
       const firstTimeTotal = parseFloat(
-        (renewalTotal + (plan.installationFee || 0) + (plan.advancePayment || 0)).toFixed(2)
+        (
+          renewalTotal +
+          (plan.installationFee || 0) +
+          (plan.advancePayment || 0)
+        ).toFixed(2)
       );
 
       // Return all fields
@@ -146,10 +160,16 @@ exports.getPlanById = async (req, res) => {
       : 0;
     const discountedBase = plan.basePrice - discount;
     const addons = (plan.ottCharge || 0) + (plan.tvCharge || 0);
-    const gst = parseFloat(((discountedBase + addons) * gstPercent / 100).toFixed(2));
+    const gst = parseFloat(
+      (((discountedBase + addons) * gstPercent) / 100).toFixed(2)
+    );
     const renewalTotal = parseFloat((discountedBase + addons + gst).toFixed(2));
     const firstTimeTotal = parseFloat(
-      (renewalTotal + (plan.installationFee || 0) + (plan.advancePayment || 0)).toFixed(2)
+      (
+        renewalTotal +
+        (plan.installationFee || 0) +
+        (plan.advancePayment || 0)
+      ).toFixed(2)
     );
 
     res.status(200).json({
@@ -169,9 +189,21 @@ exports.getPlanById = async (req, res) => {
 exports.addPlan = async (req, res) => {
   try {
     const {
-      speed, duration, provider, basePrice, installationFee, discountPercent,
-      planType, ottTier, ottCharge, ottList, tvChannels, tvCharge,
-      advancePayment, router, androidBox
+      speed,
+      duration,
+      provider,
+      basePrice,
+      installationFee,
+      discountPercent,
+      planType,
+      ottTier,
+      ottCharge,
+      ottList,
+      tvChannels,
+      tvCharge,
+      advancePayment,
+      router,
+      androidBox,
     } = req.body;
 
     if (!speed || !duration || !provider || !basePrice || !planType) {
@@ -192,7 +224,10 @@ exports.addPlan = async (req, res) => {
       ottList: Array.isArray(ottList)
         ? ottList
         : typeof ottList === "string"
-        ? ottList.split(",").map((x) => x.trim()).filter(Boolean)
+        ? ottList
+            .split(",")
+            .map((x) => x.trim())
+            .filter(Boolean)
         : [],
       tvChannels: tvChannels || "None",
       tvCharge: tvCharge !== undefined ? Number(tvCharge) : -1,
@@ -218,9 +253,21 @@ exports.updatePlan = async (req, res) => {
   const { id } = req.params;
   try {
     const {
-      speed, duration, provider, basePrice, installationFee, discountPercent,
-      planType, ottTier, ottCharge, ottList, tvChannels, tvCharge,
-      advancePayment, router, androidBox
+      speed,
+      duration,
+      provider,
+      basePrice,
+      installationFee,
+      discountPercent,
+      planType,
+      ottTier,
+      ottCharge,
+      ottList,
+      tvChannels,
+      tvCharge,
+      advancePayment,
+      router,
+      androidBox,
     } = req.body;
 
     // Parse & sanitize arrays/booleans
@@ -237,7 +284,10 @@ exports.updatePlan = async (req, res) => {
       ottList: Array.isArray(ottList)
         ? ottList
         : typeof ottList === "string"
-        ? ottList.split(",").map((x) => x.trim()).filter(Boolean)
+        ? ottList
+            .split(",")
+            .map((x) => x.trim())
+            .filter(Boolean)
         : [],
       tvChannels: tvChannels || "None",
       tvCharge: tvCharge !== undefined ? Number(tvCharge) : -1,
@@ -249,11 +299,9 @@ exports.updatePlan = async (req, res) => {
         androidBox?.toString().toLowerCase() === "yes",
     };
 
-    const updatedPlan = await Plan.findByIdAndUpdate(
-      id,
-      normalizedPlan,
-      { new: true }
-    );
+    const updatedPlan = await Plan.findByIdAndUpdate(id, normalizedPlan, {
+      new: true,
+    });
     if (!updatedPlan)
       return res.status(404).json({ message: "Plan not found" });
     res.status(200).json(updatedPlan);
@@ -301,11 +349,17 @@ exports.filterPlans = async (req, res) => {
       const discountedBase = plan.basePrice - discount;
       const addons = (plan.ottCharge || 0) + (plan.tvCharge || 0);
       const gst = parseFloat(
-        ((discountedBase + addons) * gstPercent / 100).toFixed(2)
+        (((discountedBase + addons) * gstPercent) / 100).toFixed(2)
       );
-      const renewalTotal = parseFloat((discountedBase + addons + gst).toFixed(2));
+      const renewalTotal = parseFloat(
+        (discountedBase + addons + gst).toFixed(2)
+      );
       const firstTimeTotal = parseFloat(
-        (renewalTotal + (plan.installationFee || 0) + (plan.advancePayment || 0)).toFixed(2)
+        (
+          renewalTotal +
+          (plan.installationFee || 0) +
+          (plan.advancePayment || 0)
+        ).toFixed(2)
       );
 
       return {
@@ -327,9 +381,7 @@ exports.filterPlans = async (req, res) => {
 // In InternetPlansController.js
 exports.getRecentPlans = async (req, res) => {
   try {
-    const recentPlans = await Plan.find()
-      .sort({ updatedAt: -1 })
-      .limit(5);
+    const recentPlans = await Plan.find().sort({ updatedAt: -1 }).limit(5);
     res.status(200).json(recentPlans);
   } catch (error) {
     console.error("Error fetching recent plans:", error); // This will show the real error in your server logs

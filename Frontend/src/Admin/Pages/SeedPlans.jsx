@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../../utils/axiosInstance"; 
+import API from "../Api/Api";
 import { toast } from "react-toastify";
 const SeedPlans = () => {
   const [file, setFile] = useState(null);
@@ -30,7 +30,12 @@ const SeedPlans = () => {
     <div style={{ padding: "20px" }}>
       <h2>Seed Plans from Excel</h2>
       <form onSubmit={handleUpload}>
-        <input type="file" accept=".xlsx" onChange={(e) => setFile(e.target.files[0])} required />
+        <input
+          type="file"
+          accept=".xlsx"
+          onChange={(e) => setFile(e.target.files[0])}
+          required
+        />
         <button type="submit">Upload & Seed</button>
       </form>
       {message && <p style={{ marginTop: "10px" }}>{message}</p>}
