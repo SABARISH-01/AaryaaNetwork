@@ -110,6 +110,7 @@ function ContactPage() {
           message: "",
         });
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (err) {
       toast.error("Something went wrong. Try again.");
     } finally {
@@ -326,6 +327,7 @@ function ContactPage() {
                               className="input-box"
                               value={form.firstName}
                               onChange={handleChange}
+                              required
                             ></input>
                             {errors.firstName && (
                               <p className="error">{errors.firstName}</p>
@@ -360,6 +362,7 @@ function ContactPage() {
                               className="input-box"
                               value={form.phone}
                               onChange={handleChange}
+                              required
                             />
                             {errors.phone && (
                               <p className="error">{errors.phone}</p>
@@ -376,6 +379,7 @@ function ContactPage() {
                               className="input-box"
                               value={form.address}
                               onChange={handleChange}
+                              required
                             />
                             {errors.address && (
                               <p className="error">{errors.address}</p>
@@ -394,6 +398,7 @@ function ContactPage() {
                             className="input-adr-box"
                             value={form.email}
                             onChange={handleChange}
+                            required
                           />
                           {errors.email && <p className="error">{errors.email}</p>}
                         </div>

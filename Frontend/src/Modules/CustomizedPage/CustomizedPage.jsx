@@ -298,8 +298,8 @@ const CustomizedPage = () => {
             </h2>
             <p className="heading-para">
               Connect every smile at home with our joyful fibre experience —
-              bringing internet, TV, and OTT together to keep your family
-              entertained, united, and closer than ever.
+              bringing internet, TV and OTT together to keep your family
+              entertained, united and closer than ever.
             </p>
           </div>
           <div className="total-container">
