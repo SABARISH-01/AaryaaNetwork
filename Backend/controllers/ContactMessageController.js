@@ -1,6 +1,7 @@
 const { sendContactEmail } = require("../utils/sendContactEmail");
 
 exports.handleContactForm = async (req, res) => {
+  console.log('hit', req.body);
   const { firstName, lastName, email, phone, address, message, selectedPlan } = req.body;
   const name = `${firstName} ${lastName}`;
   if (!firstName || !lastName || !email || !phone || !address || !message) {

@@ -1,4 +1,4 @@
-import React, { use } from "react";
+// import React, { use } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -40,7 +40,7 @@ function ContactPage() {
   });
 
   const [errors, setErrors] = useState({});
-  const [responseMsg, setResponseMsg] = useState("");
+  // const [responseMsg, setResponseMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPlan, setShowPlan] = useState(true);
 
@@ -54,7 +54,7 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    setResponseMsg("");
+    // setResponseMsg("");
     setLoading(true);
 
     try {
@@ -83,14 +83,16 @@ function ContactPage() {
       }
 
       const res = await fetch(
-        "https://aaryaanetwork-backend.onrender.com/api/contact/post",
+        "http://localhost:5000/api/contact/post",
         {
           method: "POST",
           body: JSON.stringify(requestBody),
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },{
+          withCredentials:true
+        },
       );
 
       const data = await res.json();
