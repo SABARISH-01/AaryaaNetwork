@@ -514,8 +514,8 @@ const CustomizedPage = () => {
                           {currentPlan.ottList &&
                           currentPlan.ottList.length > 0 ? (
                             <>
-                              {currentPlan.ottList.slice(0, 3).join(", ")}
-                              {currentPlan.ottList.length > 3 ? ", ..." : ""}
+                              {currentPlan.ottList.slice(0, 2).join(", ")}
+                              {currentPlan.ottList.length > 2 ? ", ..." : ""}
                             </>
                           ) : (
                             <span
