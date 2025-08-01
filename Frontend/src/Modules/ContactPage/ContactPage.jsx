@@ -83,7 +83,7 @@ function ContactPage() {
       }
 
       const res = await fetch(
-        "http://localhost:5000/api/contact/post",
+        "https://aaryaanetwork-backend.onrender.com/api/contact/post",
         {
           method: "POST",
           body: JSON.stringify(requestBody),
