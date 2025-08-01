@@ -357,9 +357,7 @@ const CustomizedPage = () => {
                         onClick={() => setSelectedProvider(provider)}
                         type="button"
                       >
-                        <div className="circle">
-                           
-                        </div>
+                        <div className="circle"></div>
                         {provider}
                       </button>
                     ))}
@@ -441,6 +439,7 @@ const CustomizedPage = () => {
                   </div>
                 </div>
               )}
+           
             </div>
 
             {/* Plan Details */}
@@ -685,7 +684,10 @@ const CustomizedPage = () => {
                       className="get-plan-btn"
                       onClick={() =>
                         navigate("/contact", {
-                          state: { selectedPlan: currentPlan , scrollTo: "selected-plan-section" },
+                          state: {
+                            selectedPlan: currentPlan,
+                            scrollTo: "selected-plan-section",
+                          },
                         })
                       }
                     >
