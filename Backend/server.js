@@ -3,6 +3,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const serverless = require("serverless-http"); // Import serverless-http for Lambda
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 connectDB();
 
+// Route imports
 const InternetPlanRoutes = require("./routes/InternetPlanRoutes");
 app.use("/api/plans", InternetPlanRoutes);
 
@@ -28,10 +30,14 @@ app.use("/api/", AdminRoutes);
 const adminSettingsRoutes = require("./routes/SettingsRoutes");
 app.use("/api/settings", adminSettingsRoutes);
 
-const contactRoutes=require("./routes/ContactRoutes");
-app.use("/api/contact",contactRoutes);
+const contactRoutes = require("./routes/ContactRoutes");
+app.use("/api/contact", contactRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+// Remove or comment out the app.listen() block for Lambda
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server started on port ${PORT}`);
+// });
+
+// Export the Lambda handler
+module.exports.handler = serverless(app);
